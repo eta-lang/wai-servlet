@@ -19,16 +19,15 @@ let pkgAnyVer = λ(packageName : Text) → pkg packageName prelude.anyVersion
 let etaImpl =
         λ(cfg : types.Config)
       → λ(ver : types.VersionRange)
-      → cfg.impl (types.Compiler.Eta {=}) ver
+      → cfg.impl types.Compiler.Eta ver
 
 let updateRepo =
       prelude.utils.mapSourceRepos
       (   λ(srcRepo : types.SourceRepo)
         →   srcRepo
-          ⫽ { tag =
-                [ "0.1.5.1" ] : Optional Text
+          ⫽ { tag = Some "0.1.5.1"
             , kind =
-                types.RepoKind.RepoThis {=}
+                types.RepoKind.RepoThis
             }
       )
 
@@ -40,7 +39,7 @@ in  updateRepo
       ⫽ { description =
             "Integration of eta wai applications with the servlet api"
         , license =
-            types.License.BSD3 {=}
+            types.License.BSD3
         , license-files =
             [ "LICENSE" ]
         , author =
@@ -48,7 +47,7 @@ in  updateRepo
         , maintainer =
             "Javier Neira Sanchez <atreyu.bbb@gmail.com>"
         , version =
-            v "0.1.5.1"
+            v "0.1.5.2"
         , cabal-version =
             v "1.12"
         , category =
@@ -85,8 +84,6 @@ in  updateRepo
                         ]
                     , hs-source-dirs =
                         [ "src" ]
-                    , default-language =
-                        Some (types.Languages.Haskell2010 {=})
                     , build-depends =
                           [ pkg
                             "base"
